@@ -1,0 +1,21 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+<h2>Applications</h2>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>Name</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for application in object_list %}
+		<tr>
+			<td>{{ application.name }}</td>
+		</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

@@ -1,7 +1,6 @@
 # Create your views here.
 from rest_framework import viewsets
-from Deployment import models, serializers
-
+from deployment import models, serializers
 
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = models.Application.objects.all()

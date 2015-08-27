@@ -41,13 +41,9 @@ INSTALLED_APPS = (
     'rest_framework',
     'corsheaders',
     'ServerAdministrator',
-    'Deployment',
+    'deployment',
     'rest'
 )
-
-CORS_ORIGIN_WHITELIST = (
-        'localhost:4200',
-    )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -92,15 +88,6 @@ DATABASES = {
     }
 }
 
-CORS_ALLOW_HEADERS = (
-        'x-requested-with',
-        'content-type',
-        'accept',
-        'origin',
-        'authorization',
-        'x-csrftoken'
-    )
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -121,6 +108,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Rest framework configuration
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -141,4 +129,18 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     )
 }
+
+CORS_ORIGIN_WHITELIST = (
+        'localhost:4200',
+    )
+
+
+CORS_ALLOW_HEADERS = (
+        'x-requested-with',
+        'content-type',
+        'accept',
+        'origin',
+        'authorization',
+        'x-csrftoken'
+    )
 

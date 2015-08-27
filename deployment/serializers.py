@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Deployment import models
+from deployment import models
 from ServerAdministrator.models import SshUser
 
 __author__ = 'dracks'

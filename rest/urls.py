@@ -1,6 +1,6 @@
 from rest_framework import routers
-from Deployment import views as deployment_views
-from ServerAdministrator import views as admin_views
+from deployment import rest_views as deployment_views
+from ServerAdministrator import rest_views as admin_views
 
 __author__ = 'dracks'
 
@@ -14,6 +14,6 @@ router.register('version_files', deployment_views.VersionFileViewSet)
 router.register('config_files', deployment_views.ConfigFileViewSet)
 router.register('config_file_params', deployment_views.ConfigFileParamViewSet)
 router.register('deployment_applications', deployment_views.DeploymentApplicationViewSet)
-router.register('demployment_application_params', deployment_views.DeploymentApplicationParamViewSet)
+router.register('deployment_application_params', deployment_views.DeploymentApplicationParamViewSet)
 
 urlpatterns = router.urls

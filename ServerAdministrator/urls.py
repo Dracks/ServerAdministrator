@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from oauth2_provider import views as oauth_views
+from ServerAdministrator.views import IndexView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -25,5 +26,7 @@ urlpatterns = [
     url(r'^oauth/authorize/$', oauth_views.AuthorizationView.as_view(), name="authorize"),
     url(r'^oauth/token/$', oauth_views.TokenView.as_view(), name="token"),
     url(r'^oauth/revoke_token/$', oauth_views.RevokeTokenView.as_view(), name="revoke-token"),
-    url(r'^api/', include('rest.urls'))
+    url(r'^api/', include('rest.urls')),
+    url(r'^deployment/', include('deployment.urls', namespace='deployment')),
+    url(r'^$', IndexView.as_view())
 ]
