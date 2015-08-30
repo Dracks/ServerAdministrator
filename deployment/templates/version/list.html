@@ -1,0 +1,24 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+<h2>Versions</h2>
+<a class="btn btn-primary" href="{% url 'deployment:new_from_zip' current_app_id">New from zip</a>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Actions</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for version in object_list %}
+		<tr>
+			<td>{{ version.name }}</td>
+			<td></td>
+		</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
