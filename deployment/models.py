@@ -19,6 +19,9 @@ TYPES_PARAM = (
 class Application(models.Model):
     name = models.CharField(max_length=50)
 
+    def __unicode__(self):
+        return self.name
+
 class Version(models.Model):
     application = models.ForeignKey(Application)
     version = models.IntegerField()
@@ -41,14 +44,16 @@ class Version(models.Model):
             file_path = os.path.dirname(name)
             contents = zip_file.read(name)
             md5 = hashlib.md5(contents).hexdigest()
-            VersionFile(version=self, name=file_name, path=file_path, hash=md5, content=contents).save()
+            v = VersionFile(version=self, name=file_name, path=file_path, hash=md5, content=contents)
+            v.save()
+        return self
 
 class VersionFile(models.Model):
     version = models.ForeignKey(Version)
     name = models.CharField(max_length=100)
     path = models.CharField(max_length=500)
     hash = models.CharField(max_length=50)
-    content = models.TextField()
+    content = models.BinaryField()
 
 class ChangeFile(models.Model):
     application = models.ForeignKey(Application)

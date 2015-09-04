@@ -1,0 +1,28 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+	<h2>Draft ({{ version.version }})</h2>
+	<div class="Draft">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>path</th>
+					<th>name</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for file in files %}
+					<tr>
+						<td>{{ file.path }}</td>
+						<td>{{ file.name }}</td>
+						<td>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

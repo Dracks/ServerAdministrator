@@ -3,6 +3,8 @@ from django.test import TestCase
 # Create your tests here.
 from deployment import models
 
+import zipfile
+
 
 class VersionGetNextVersionTest(TestCase):
 
@@ -17,3 +19,11 @@ class VersionGetNextVersionTest(TestCase):
         previous=models.Version(application=self.app, version=2)
         previous.save()
         self.assertEqual(models.Version.get_next_version(self.app), 3)
+
+class VersionNewFromZipTest(TestCase):
+    def setUp(self):
+        self.app=models.Application(name="Test1")
+        self.app.save()
+
+    def test_not_valid(self):
+        pass

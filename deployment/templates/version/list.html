@@ -2,20 +2,28 @@
 
 {% block content %}
 <h2>Versions</h2>
-<a class="btn btn-primary" href="{% url 'deployment:new_from_zip' current_app_id">New from zip</a>
+<a class="btn btn-primary" href="{% url 'deployment:version_zip_new' application.pk %}">New from zip</a>
 <div class="table-responsive">
 	<table class="table table-striped">
 		<thead>
 		<tr>
-			<th>Name</th>
-			<th>Actions</th>
+			<th>Version</th>
+			<th>Draft</th>
+			<th>Action</th>
 		</tr>
 		</thead>
 		<tbody>
 		{% for version in object_list %}
 		<tr>
-			<td>{{ version.name }}</td>
-			<td></td>
+			<td>{{ version.version }}</td>
+			<td>{{ version.is_draft }}</td>
+			<td>
+				{% if version.is_draft %}
+					<a href="{% url 'deployment:version_draft' version.pk %}" class="btn btn-primary">
+						Edit
+					</a>
+				{% endif %}
+			</td>
 		</tr>
 		{% endfor %}
 		</tbody>

@@ -1,0 +1,22 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+<h2>New version from zip ({{application.name}})</h2>
+<div class="Edit">
+	<form enctype="multipart/form-data" class="detail" method="post" action="">
+		{% csrf_token %}
+		<input type="hidden" value="{{application.pk}}" name="{{form.application.name}}">
+		<label>File</label>
+		<input type="file" value="{{form.file.value}}" name="{{form.file.name}}">
+		{% if form.errors %}
+		<div class="alert alert-error fade in" role="alert">
+			{{ form.errors }}
+		</div>
+		{% endif %}
+		<div class="actions">
+			<a href="{% url 'deployment:version_list' application.pk %}" class="btn btn-danger">Back</a>
+			<button class="btn btn-primary" type="submit" value="Save">Save</button>
+		</div>
+	</form>
+</div>
+{% endblock %}

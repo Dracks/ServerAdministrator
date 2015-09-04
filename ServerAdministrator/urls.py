@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from oauth2_provider import views as oauth_views
 from ServerAdministrator.views import IndexView
+import oauth2_provider.urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
