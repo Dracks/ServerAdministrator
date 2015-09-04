@@ -1,0 +1,15 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+	<h2>Delete draft ({{ version.creation }} - {{ version.version }})</h2>
+	<div class="Delete">
+		<h3>Are you sure to delete this version?</h3>
+		<div>
+			<form method="post" action="">
+				{% csrf_token %}
+				<a href="{% url 'deployment:version_list' version.application.pk %}" class="btn btn-default">Cancel</a>
+				<button type="submit" class="btn btn-danger">Delete</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

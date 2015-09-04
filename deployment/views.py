@@ -1,10 +1,11 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, ListView, DetailView, TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, DeleteView
 from ServerAdministrator.views import LoginRequiredMixin
 from deployment import models, forms
 from django.views.generic import edit
+from django.http import HttpResponseRedirect
 
 import zipfile
 
@@ -45,7 +46,7 @@ class VersionListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         self.application = get_object_or_404(models.Application, pk=self.kwargs[APP_ID_KEY])
-        return models.Version.objects.filter(application_id=self.application.id)
+        return models.Version.objects.filter(application_id=self.application.id).order_by('creation').reverse()
 
     def get_context_data(self, **kwargs):
         context = super(VersionListView, self).get_context_data(**kwargs)
@@ -68,7 +69,7 @@ class VersionNewFromZipView(LoginRequiredMixin, FormView):
         file = zipfile.ZipFile(form['file'].value())
         version = models.Version.create_from_zip(app, file)
         version.save()
-        return reverse('deployment:version_draft', args=[version.pk])
+        return HttpResponseRedirect(reverse('deployment:version_draft', args=[version.pk]))
 
     def post(self, request, *args, **kwargs):
         return super(VersionNewFromZipView, self).post(request, *args, **kwargs)
@@ -83,4 +84,14 @@ class VersionDraftView(LoginRequiredMixin, DetailView):
         context = super(VersionDraftView, self).get_context_data(**kwargs)
         context['files'] = files
         return context
+
+class VersionDeleteDraftView(LoginRequiredMixin, DeleteView):
+    model = models.Version
+    template_name = "version/delete.html"
+    queryset = models.Version.objects.filter(is_draft=True)
+
+    def get_success_url(self):
+        app = self.get_object()
+        return reverse('deployment:version_list', args=[app.pk])
+
 

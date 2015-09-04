@@ -7,6 +7,7 @@
 	<table class="table table-striped">
 		<thead>
 		<tr>
+			<th>Creation</th>
 			<th>Version</th>
 			<th>Draft</th>
 			<th>Action</th>
@@ -15,12 +16,16 @@
 		<tbody>
 		{% for version in object_list %}
 		<tr>
+			<td>{{ version.creation }}</td>
 			<td>{{ version.version }}</td>
 			<td>{{ version.is_draft }}</td>
 			<td>
 				{% if version.is_draft %}
 					<a href="{% url 'deployment:version_draft' version.pk %}" class="btn btn-primary">
 						Edit
+					</a>
+					<a href="{% url 'deployment:delete_draft' version.pk %}" class="btn btn-danger">
+						Delete
 					</a>
 				{% endif %}
 			</td>

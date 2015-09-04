@@ -1,3 +1,4 @@
+from datetime import datetime
 import os, hashlib
 from django.db import models
 from django.db.models import Max
@@ -25,6 +26,7 @@ class Application(models.Model):
 class Version(models.Model):
     application = models.ForeignKey(Application)
     version = models.IntegerField()
+    creation = models.DateTimeField(default=datetime.now)
     is_draft = models.BooleanField(default=True)
     is_downgrade = models.BooleanField(default=False)
 
