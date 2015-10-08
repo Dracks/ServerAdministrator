@@ -11,5 +11,6 @@ urlpatterns = [
     url('^versions/(?P<application_pk>[0-9]+)/$', views.VersionListView.as_view(), name="version_list"),
     url('^version/(?P<application_pk>[0-9]+)/new/$', views.VersionNewFromZipView.as_view(), name="version_zip_new"),
     url('^version/(?P<pk>[0-9]+)/draft', views.VersionDraftView.as_view(), name="version_draft"),
-    url('^version/(?P<pk>[0-9]+)/delete', views.VersionDeleteDraftView.as_view(), name="delete_draft")
+    url('^version/(?P<pk>[0-9]+)/delete', views.VersionDeleteDraftView.as_view(), name="version_delete"),
+    url('^change-file/add/', views.ChangeFileAddView.as_view(), name="change_file:file-add")
 ]

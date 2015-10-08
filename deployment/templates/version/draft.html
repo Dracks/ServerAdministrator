@@ -14,7 +14,7 @@
 				</thead>
 				<tbody>
 				{% for file in files %}
-					<tr>
+					<tr {% if file.delete %}style="color: red"{% endif %}>
 						<td>{{ file.path }}</td>
 						<td>{{ file.name }}</td>
 						<td>

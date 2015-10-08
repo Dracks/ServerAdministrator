@@ -91,7 +91,10 @@ class VersionDeleteDraftView(LoginRequiredMixin, DeleteView):
     queryset = models.Version.objects.filter(is_draft=True)
 
     def get_success_url(self):
-        app = self.get_object()
+        app = self.get_object().application
         return reverse('deployment:version_list', args=[app.pk])
+
+class ChangeFileAddView(LoginRequiredMixin, FormView):
+    model = models.VersionFile
 
 
